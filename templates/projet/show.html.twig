@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projet{% endblock %}
+
+{% block body %}
+    <h1 class="display-1 text-center text-white mb-5 mt-5" style="font-family: 'Dancing Script', cursive; font-size: 5rem;">Fiche Projet</h1>
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="text-white d-flex flex-column align-items-center justify-content-center p-4 rounded shadow-strong border border-3 w-75">
+            {% if projets.picture is not empty %}
+            <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+
+                    {% for picture in projets.picture %}
+                        <div class="carousel-item {% if loop.first %}active{% endif %}">
+                            <img src="{{ asset('uploads/' ~ picture.url) }}"
+                                class="d-block w-100"
+                                style="max-height: 400px; object-fit: cover;"
+                                alt="Photo du projet">
+                        </div>
+                    {% endfor %}
+                </div>
+                {% if projets.picture|length > 1 %}
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                {% endif %}
+            </div>
+            {% else %}
+                <p>Aucune photo disponible</p>
+            {% endif %}
+                <h2 class="mb-4 mt-5">{{ projets.titre|raw }}</h2>
+            <div>
+                <p class="mb-4">{{ projets.description|raw }}</p>
+                <p class="mb-4">Nombre de jours : {{ projets.nbJours }}</p>
+                <p class="mb-4">Technologies utilisées :
+                {% for techno in projets.technologies %}
+                    <span class="badge bg-secondary me-2">{{ techno.nom }}</span>
+                {% else %}
+                    <span>Aucune technologie associée</span>
+                {% endfor %}
+            </div>
+            <div>
+                <a href="{{ path('app_projet') }}" class="btn btn-primary mt-4 shadow-strong">Retour <i class="fa-solid fa-arrow-left"></i></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

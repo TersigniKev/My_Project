@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue!{% endblock %}
+
+{% block body %}
+
+<section class="d-flex flex-column align-items-center justify-content-center message-container text-center text-white p-4 w-100 h-100" style=" font-family: 'Dancing Script', cursive; font-size: 2rem;">
+    <div class="photo-containeur border rounded h-50 d-flex align-items-center shadow-strong">
+        <h1>Bienvenue sur mon Porte-folio</h1>
+    </div>
+    <div>
+        <a href="{{ path('app_projet') }}" class="btn btn-primary mt-4 shadow-strong">voir mon travail <i class="fa-solid fa-door-open"></i></a>
+    </div>
+</section>
+{% endblock %}
